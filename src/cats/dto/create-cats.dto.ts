@@ -1,4 +1,4 @@
-import { IsEmail, IsString } from 'class-validator';
+import { IsEmail, IsMobilePhone, IsString } from 'class-validator';
 
 export class CreateCatsDto {
   @IsString()
@@ -6,4 +6,7 @@ export class CreateCatsDto {
 
   @IsEmail()
   email: string;
+
+  @IsMobilePhone()
+  mobile: string;
 }
