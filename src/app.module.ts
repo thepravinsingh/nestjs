@@ -3,12 +3,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatModule } from './cat/cat.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://praveen:praveen@cluster0.o0dhjcf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
-    ),
+ imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, 
+    }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGO_URI'),
+      }),
+      inject: [ConfigService],
+    }),
     CatModule,
   ],
   controllers: [AppController],
