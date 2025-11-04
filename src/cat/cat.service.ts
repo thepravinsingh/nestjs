@@ -13,11 +13,11 @@ export class CatService {
     return allCatsData.save();
   }
 
-  async findCat() {
+  async findCat() {  
     return this.catModel.find().exec();
   }
 
-  async findOneCat(id: string) {
+  async findOneCat(id: string) { 
     const oneCatData = await this.catModel.findById(id);
     return oneCatData;
   }

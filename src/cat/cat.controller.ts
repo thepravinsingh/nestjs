@@ -16,7 +16,7 @@ export class CatController {
   constructor(private readonly catService: CatService) {}
 
   @Post()
-  createCat(@Body() body: CreateCatDto) {
+  createCat(@Body() body: CreateCatDto) { 
     return this.catService.create(body);
   }
 
